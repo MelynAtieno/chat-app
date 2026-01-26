@@ -6,6 +6,8 @@
 }
 
 .chat-header {
+  display: flex;
+  justify-content: flex-end;
   padding: 15px;
   border-bottom: 1px solid #ddd;
   background-color: pink;
@@ -24,9 +26,11 @@
 
 .chat-input-section {
   display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 15px 0;
   border-top: 1px solid #ddd;
-  gap: 10px;
+  gap: 20px;
   width: 100%;
   background-color: pink;
 }
@@ -35,11 +39,11 @@
   border-radius: 8px;
   border: 1px solid #000;
   height: 40px;
-  width: 600px;
-  flex: 1;
+  width: 700px;
   padding: 5px 10px;
   background-color: #fff;
   color: #000;
+  font-size: 15px;
 }
 
 .text-input::placeholder {

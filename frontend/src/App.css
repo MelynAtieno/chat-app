@@ -3,6 +3,10 @@
 }
 .welcome {
   text-align: center;
-  margin-top: 50px;
+  padding-top: 50px;
   margin-bottom: 30px;
+}
+.landing-page {
+  background-color: pink;
+  height: 100%;
 }

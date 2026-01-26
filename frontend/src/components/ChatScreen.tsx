@@ -11,8 +11,7 @@ function ChatScreen() {
     <div className="chat-container">
       {/* Header Section - Top */}
       <div className="chat-header">
-        <h1>Start Chatting!!!!!</h1>
-        <button onClick={handleBack}>BACK</button>
+        <button onClick={handleBack}>LEAVE</button>
       </div>
 
       {/* Messages Section - Middle (expands to fill space) */}

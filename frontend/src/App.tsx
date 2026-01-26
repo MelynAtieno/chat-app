@@ -10,12 +10,12 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path = "/" element = {
-        <div>
+        <div className='landing-page'>
           <h1 className='welcome'>Welcome to Chat App!</h1>        
           <UsernameInput />
         </div>
       } />
-      
+
       <Route path = "/chat" element = {<ChatScreen />} />
       </Routes>
     </BrowserRouter>
