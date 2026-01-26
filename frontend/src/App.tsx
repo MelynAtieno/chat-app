@@ -1,20 +1,24 @@
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
 import UsernameInput from './components/UsernameInput'
+import ChatScreen from './components/ChatScreen'
 
 function App() {
 
 
   return (
-    <>
-      <div>
+    <BrowserRouter>
+    <Routes>
+      <Route path = "/" element = {
         <div>
-          <h1 className='welcome'>Welcome to Chat App!</h1>
+          <h1 className='welcome'>Welcome to Chat App!</h1>        
+          <UsernameInput />
         </div>
-        
-        <UsernameInput />
-      </div>
-    </>
+      } />
+      
+      <Route path = "/chat" element = {<ChatScreen />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
