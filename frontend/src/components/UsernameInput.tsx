@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 function UsernameInput() {
     const navigate = useNavigate();
+    
     const handleJoin = () => {
         navigate('/chat');
     }
