@@ -50,3 +50,23 @@
   color: #888787;
   font-size: 15px;
 }
+
+.message{
+    background-color: #00d4ff;
+    width: 50%;
+    height: 60px;
+    margin: 20px;
+    margin-left: auto;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 18px;    
+}
+.message2{
+    background-color: #ffd700;
+    width: 50%;
+    height: 60px;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 18px;
+}

@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import '../styles/ChatScreen.css';
+import { useState } from 'react';
 
 
 function ChatScreen() {
@@ -7,6 +8,36 @@ function ChatScreen() {
   const handleBack = () => {
     navigate('/');
   }
+
+  const [messages, setMessages] = useState<string[]>([]); 
+  const [inputText, setInputText] = useState('');
+
+
+  
+  // Handle sending a message
+  const handleSend = () => {
+    // Logic to send message
+    if (inputText.trim() !== '') {
+      setMessages([...messages, inputText]);
+      setInputText('');
+    } else {
+      alert('Please enter a message before sending.');
+    } 
+        
+  }
+
+  // Display messages
+  const renderedMessages = messages.map((msg, index) => (
+    <>
+    <div key={index} className="message">
+      {msg}
+    </div>
+    <div key={index} className="message2">
+      {msg}
+    </div>
+    </>
+  ));
+
   return (
     <div className="chat-container">
       {/* Header Section - Top */}
@@ -16,13 +47,13 @@ function ChatScreen() {
 
       {/* Messages Section - Middle (expands to fill space) */}
       <div className="chat-messages">
-        {/* Messages will go here */}
+           {renderedMessages}        
       </div>
 
       {/* Input Section - Bottom */}
       <div className="chat-input-section">
-        <input className="text-input" type="text" placeholder="Type a message..." />
-        <button>SEND</button>
+        <input className="text-input" value={inputText} onChange={(e) => setInputText(e.target.value)} type="text" placeholder="Type a message..." />
+        <button onClick={handleSend}>SEND</button>
       </div>
     </div>
   );
