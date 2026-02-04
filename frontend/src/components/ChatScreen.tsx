@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import '../styles/ChatScreen.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import {io} from 'socket.io-client';
 
+const socket = io('http://localhost:3000');
 
 function ChatScreen() {
   const navigate = useNavigate();
@@ -9,7 +11,18 @@ function ChatScreen() {
     navigate('/');
   }
 
-  const [messages, setMessages] = useState<string[]>([]); 
+  // Listen for incoming messages from the server
+  useEffect(() => {
+    socket.on('chat message', (msg) => {
+      setMessages((prev) => [...prev, msg]);
+    });
+    // Cleanup when component unmounts. This prevents memory leaks and ensures that the event listener is removed when the component is no longer in use.
+    return () => {
+      socket.off('chat message')
+    };
+  }, []);
+
+  const [messages, setMessages] = useState<{text: string; senderId: string}[]>([]); 
   const [inputText, setInputText] = useState('');
 
 
@@ -19,25 +32,26 @@ function ChatScreen() {
     // Logic to send message
     if (inputText.trim() !== '') {
       // Take the current input value and add it to the messages array
-      setMessages([...messages, inputText]);
+      //setMessages([...messages, inputText]);
+      socket.emit('chat message', {
+        text: inputText,
+        senderId: socket.id
+      }); // Send the message to the server
       setInputText(''); // clear the input field
     } else {
       alert('Please enter a message before sending.');
-    } 
-        
-  }
+    }         
+  };
 
   // Display messages
-  const renderedMessages = messages.map((msg, index) => (
-    <>
-    <div key={index} className="message">
-      {msg}
-    </div>
-    <div key={index} className="message2">
-      {msg}
-    </div>
-    </>
-  ));
+  const renderedMessages = messages.map((msg, index) => {
+    const isMyMessage = msg.senderId === socket.id;
+    return (
+      <div key={index} className={`message ${isMyMessage ? 'my-message' : 'other-message'}`}>
+        {msg.text}
+      </div>
+    );
+  });
 
   return (
     <div className="chat-container">

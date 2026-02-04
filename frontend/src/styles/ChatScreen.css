@@ -51,20 +51,20 @@
   font-size: 15px;
 }
 
-.message{
+.my-message{
     background-color: #00d4ff;
     width: 50%;
-    height: 60px;
+    min-height: 60px;
     margin: 20px;
     margin-left: auto;
     padding: 10px;
     border-radius: 10px;
     font-size: 18px;    
 }
-.message2{
+.other-message{
     background-color: #ffd700;
     width: 50%;
-    height: 60px;
+    min-height: 60px;
     margin: 20px;
     padding: 10px;
     border-radius: 10px;
