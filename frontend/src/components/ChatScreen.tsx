@@ -18,8 +18,9 @@ function ChatScreen() {
   const handleSend = () => {
     // Logic to send message
     if (inputText.trim() !== '') {
+      // Take the current input value and add it to the messages array
       setMessages([...messages, inputText]);
-      setInputText('');
+      setInputText(''); // clear the input field
     } else {
       alert('Please enter a message before sending.');
     } 
