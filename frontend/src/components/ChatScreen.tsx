@@ -10,6 +10,7 @@ function ChatScreen() {
   const handleBack = () => {
     navigate('/');
   }
+  const username = localStorage.getItem('username') || 'Anonymous';
 
   // Listen for incoming messages from the server
   useEffect(() => {
@@ -22,7 +23,7 @@ function ChatScreen() {
     };
   }, []);
 
-  const [messages, setMessages] = useState<{text: string; senderId: string}[]>([]); 
+  const [messages, setMessages] = useState<{username: string, text: string; senderId: string}[]>([]); 
   const [inputText, setInputText] = useState('');
 
 
@@ -34,8 +35,9 @@ function ChatScreen() {
       // Take the current input value and add it to the messages array
       //setMessages([...messages, inputText]);
       socket.emit('chat message', {
+        username: username,
         text: inputText,
-        senderId: socket.id
+        senderId: socket.id        
       }); // Send the message to the server
       setInputText(''); // clear the input field
     } else {
@@ -48,7 +50,8 @@ function ChatScreen() {
     const isMyMessage = msg.senderId === socket.id;
     return (
       <div key={index} className={`message ${isMyMessage ? 'my-message' : 'other-message'}`}>
-        {msg.text}
+        <span className='message-username'>{msg.username}</span>
+        <span className='message-text'>{msg.text}</span>
       </div>
     );
   });
