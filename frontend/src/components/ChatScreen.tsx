@@ -51,7 +51,7 @@ function ChatScreen() {
     const isMyMessage = msg.senderId === socket.id;
     return (
       <div key={index} className={`message ${isMyMessage ? 'my-message' : 'other-message'}`}>
-        <div className='message-username'>{msg.username}</div>
+        <div className='message-username'>~{msg.username}</div>
         <div className='message-text'>{msg.text}</div>
         <div className='message-timestamp'>{msg.timestamp}</div>
       </div>
