@@ -42,13 +42,6 @@ const io = new Server(httpServer, {
 io.on('connection', async (socket) => {
     console.log('User connected!:', socket.id); //Each connected client gets a unique socket object with its own id.
 
-    // Send chat history to the new user
-    try{
-        const messages = await Message.find().sort({ createdAt: 1 }).limit(100); // Fetch the last 100 messages, sorted by creation time
-        socket.emit('chat history', messages);
-    } catch (err) {
-        console.error('Error fetching chat history:', err);
-    }
     // Listen for chat messages and broadcast them to all connected clients
     socket.on('chat message', async (msg) => {
         console.log('Message received:', msg);
@@ -63,6 +56,15 @@ io.on('connection', async (socket) => {
         }
         io.emit('chat message', msg)// Broadcast the message to all connected clients
 
+    })
+
+    socket.on('request chat history', async () => {
+        try{
+            const messages = await Message.find().sort({ createdAt: 1 }).limit(100); // Fetch the last 100 messages, sorted by creation time
+            socket.emit('chat history', messages);
+        } catch (err) {
+            console.error('Error fetching chat history:', err);
+        }
     })
     
 });

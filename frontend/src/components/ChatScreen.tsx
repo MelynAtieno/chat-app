@@ -14,11 +14,20 @@ function ChatScreen() {
 
   // Listen for incoming messages from the server
   useEffect(() => {
+    // Listen for chat history (when you first connect)
+    socket.on('chat history', (history) => {
+      setMessages(history);
+    })
+
+    // Listen for new chat messages
     socket.on('chat message', (msg) => {
       setMessages((prev) => [...prev, msg]);
     });
+    // Request chat history when the component mounts
+    socket.emit('request chat history');
     // Cleanup when component unmounts. This prevents memory leaks and ensures that the event listener is removed when the component is no longer in use.
     return () => {
+      socket.off('chat history');
       socket.off('chat message')
     };
   }, []);
