@@ -23,6 +23,7 @@ function ChatScreen() {
     socket.on('chat message', (msg) => {
       setMessages((prev) => [...prev, msg]);
     });
+    
     // Request chat history when the component mounts
     socket.emit('request chat history');
     // Cleanup when component unmounts. This prevents memory leaks and ensures that the event listener is removed when the component is no longer in use.
